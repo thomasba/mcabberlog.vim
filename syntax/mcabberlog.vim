@@ -1,6 +1,6 @@
 " Vim language File
 " Language:      mcabber history file
-" Maintainger:   Thomas Ba
+" Maintainer:    Thomas Ba
 " Version:       0.6
 " Last Change:   2016-11-27
 " URL:           http://www.vim.org/scripts/script.php?script_id=3726
@@ -34,7 +34,7 @@ endif
 " Message"header"
 syn match mcabberStatusChange "^S[OFDNAI_] \d\{8}T\d\d:\d\d:\d\dZ \d\d\d .*$" contains=mcabberDate,mcabberTime
 syn match mcabberHeader "^MI \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberMsgs contains=mcabberDate,mcabberTime skipwhite
-syn match mcabberHeader "^[MQ]R \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
+syn match mcabberHeader "^[EMQ]R \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
 syn match mcabberHeaderSend "^MS \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=mcabberNicks contains=mcabberDate,mcabberTime skipwhite
 
 " Time and Date
