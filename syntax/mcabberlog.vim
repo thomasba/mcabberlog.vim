@@ -1,10 +1,14 @@
 " Vim language File
 " Language:      mcabber history file
 " Maintainger:   Thomas Ba
-" Version:       0.5a1
-" Last Change:   2011-09-05
+" Version:       0.6
+" Last Change:   2016-11-27
 " URL:           http://www.vim.org/scripts/script.php?script_id=3726
 "
+" Version 0.6
+"   • Moved keyword configuration for highlighting into vimrc
+"     → e.g.: let g:mcabber_mention='thomasba'
+"   • Highlight hidden messages from github.com/hackyourlife/lima-gold
 " Version 0.5
 "   • Handle Status changes
 " Version 0.4
@@ -23,13 +27,14 @@ if !exists("main_syntax")
 endif
 
 " Highlight this Words (in Messages):
-" Uncomment to enable!
-" syn keyword mcabberDongle thomasba
+if exists("g:mcabber_mention")
+	execute 'syn keyword mcabberMention ' . g:mcabber_mention
+endif
 
 " Message"header"
 syn match mcabberStatusChange "^S[OFDNAI_] \d\{8}T\d\d:\d\d:\d\dZ \d\d\d .*$" contains=mcabberDate,mcabberTime
 syn match mcabberHeader "^MI \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberMsgs contains=mcabberDate,mcabberTime skipwhite
-syn match mcabberHeader "^MR \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
+syn match mcabberHeader "^[MQ]R \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
 syn match mcabberHeaderSend "^MS \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=mcabberNicks contains=mcabberDate,mcabberTime skipwhite
 
 " Time and Date
@@ -74,7 +79,7 @@ hi link mcabberMsgNick Comment
 hi link mcabberStatus Comment
 hi link mcabberStatusChange Comment
 " Keywords to highlight (set above)
-hi link mcabberDongle Todo
+hi link mcabberMention Todo
 " MR ... 000 ~ ...
 hi link mcabberMsgTilde Comment
 
