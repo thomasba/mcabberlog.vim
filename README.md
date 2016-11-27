@@ -2,7 +2,7 @@
 
 Highlighting for [mcabber](https://mcabber.com/) logfiles.
 
-Example:
+Example:  
 ![screenshot](docs/screenshot.png)
 
 ## Configuration
