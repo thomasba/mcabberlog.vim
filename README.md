@@ -18,6 +18,8 @@ let g:mcabber_mention='thomasba'
 
 ## Versions
 
+- Version 0.7 (2016-12-23)
+	- Support for PMs in MUC (lima-gold client)
 - Version 0.6 (2016-11-27)
 	- Moved keyword configuration for highlighting into vimrc
 	- Highlight hidden messages from [lima-gold client](https://github.com/hackyourlife/lima-gold)
