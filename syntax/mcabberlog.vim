@@ -1,10 +1,13 @@
 " Vim language File
 " Language:      mcabber history file
 " Maintainer:    Thomas Ba
-" Version:       0.6
-" Last Change:   2016-11-27
+" Version:       0.7
+" Last Change:   2016-12-23
 " URL:           http://www.vim.org/scripts/script.php?script_id=3726
+" Git:           https://github.com/thomasba/mcabberlog.vim
 "
+" Version 0.7
+"   • Support for PMs in MUC
 " Version 0.6
 "   • Moved keyword configuration for highlighting into vimrc
 "     → e.g.: let g:mcabber_mention='thomasba'
@@ -35,7 +38,8 @@ endif
 syn match mcabberStatusChange "^S[OFDNAI_] \d\{8}T\d\d:\d\d:\d\dZ \d\d\d .*$" contains=mcabberDate,mcabberTime
 syn match mcabberHeader "^MI \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberMsgs contains=mcabberDate,mcabberTime skipwhite
 syn match mcabberHeader "^[EMQ]R \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
-syn match mcabberHeaderSend "^MS \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=mcabberNicks contains=mcabberDate,mcabberTime skipwhite
+syn match mcabberHeaderSend "^MS \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicks contains=mcabberDate,mcabberTime skipwhite
+syn match mcabberHeaderPM "^P[RS] \d\{8}T\d\d:\d\d:\d\dZ \d\d\d" nextgroup=@mcabberNicksPM contains=mcabberDate,mcabberTime skipwhite
 
 " Time and Date
 syn match mcabberDate "\d\{8\}" skipwhite contained
@@ -50,10 +54,14 @@ syn match mcabberMsgTilde "\~ .*$" contained skipwhite
 " Message nicks
 syn region mcabberNickRegion start="<" end=">" contained contains=@mcabberNicks
 syn match mcabberNick "<[^>]*>\( /me\)\?" contained 
+" private messages
+syn match mcabberNickPM "<[^>]*>\( /me\)\?" contained nextgroup=mcabberHighlightPM
+syn match mcabberHighlightPM ".*" contained
 
 " Cluster
 syn cluster mcabberMsgs contains=mcabberMsg,mcabberMsgNick
 syn cluster mcabberNicks contains=mcabberNick,mcabberMsgTilde
+syn cluster mcabberNicksPM contains=mcabberNickPM
 syn cluster mcabberRegions contains=@mcabberNicks,@mcabberMsgs
 
 " Mail und URL handling
@@ -70,6 +78,10 @@ hi link mcabberTime Number
 hi link mcabberDate Type
 " The nicknames
 hi link mcabberNick Statement
+" Private messages
+hi link mcabberHeaderPM MoreMsg
+hi link mcabberHighlightPM mcabberHeaderPM
+hi link mcabberNickPM mcabberNick
 " Mail and URL highlighting
 hi link mcabberURL String
 hi link mcabberEmail String
